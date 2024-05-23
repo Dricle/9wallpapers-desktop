@@ -43,7 +43,6 @@ app.whenReady().then(() => {
     createWindow()
 
     ipcMain.on('set-wallpaper', async function (e, { downloadUrl, fileName }) {
-        console.log(downloadUrl, fileName)
         const storagePath = 'storage/9wpp'
 
         if (!fs.existsSync(storagePath)) {
@@ -54,7 +53,8 @@ app.whenReady().then(() => {
 
         try {
             console.log('===========')
-            console.log('TRY SET WPP')
+            console.log('SET WPP')
+            console.log(fileName)
             console.log('===========')
             await setWallpaper(storagePath + '/' + fileName)
         } catch (error) {

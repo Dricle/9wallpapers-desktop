@@ -37,7 +37,7 @@ export default {
 
                     window.electronAPI.setWallpaper({
                         downloadUrl: this.wallpaper.download_url,
-                        fileName: 'ssfdsdfsf.png'
+                        fileName: this.wallpaper.file_name
                     })
                 })
         }
