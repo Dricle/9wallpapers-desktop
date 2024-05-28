@@ -12,6 +12,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"9wallpapers-desktop@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "9wallpapers-desktop@workspace:."
+  dependencies:
+    "@nuxt/devtools": "npm:^1.3.1"
+    "@nuxt/eslint": "npm:^0.3.12"
+    "@nuxt/ui": "npm:2.13.0"
+    "@pinia-plugin-persistedstate/nuxt": "npm:^1.2.0"
+    "@pinia/nuxt": "npm:^0.5.1"
+    "@types/download": "npm:^8"
+    download: "npm:^8.0.0"
+    electron: "npm:29.3.3"
+    electron-builder: "npm:^24.13.3"
+    eslint: "npm:^9.2.0"
+    eslint-plugin-nuxt: "npm:^4.0.0"
+    nuxt: "npm:3.6.5"
+    nuxt-electron: "npm:^0.7.0"
+    postcss-custom-properties: "npm:^13.3.10"
+    unplugin-vue-components: "npm:^0.26.0"
+    vite-plugin-electron: "npm:^0.28.7"
+    vite-plugin-electron-renderer: "npm:^0.14.5"
+    vue: "npm:^3.4.27"
+    wallpaper: "npm:^7.2.1"
+    wallpaper-to-work-with-asar: "npm:^0.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@alloc/quick-lru@npm:^5.2.0":
   version: 5.2.0
   resolution: "@alloc/quick-lru@npm:5.2.0"
@@ -9416,32 +9443,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt-app@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "nuxt-app@workspace:."
-  dependencies:
-    "@nuxt/devtools": "npm:^1.3.1"
-    "@nuxt/eslint": "npm:^0.3.12"
-    "@nuxt/ui": "npm:2.13.0"
-    "@pinia-plugin-persistedstate/nuxt": "npm:^1.2.0"
-    "@pinia/nuxt": "npm:^0.5.1"
-    "@types/download": "npm:^8"
-    download: "npm:^8.0.0"
-    electron: "npm:29.3.3"
-    electron-builder: "npm:^24.13.3"
-    eslint: "npm:^9.2.0"
-    eslint-plugin-nuxt: "npm:^4.0.0"
-    nuxt: "npm:3.6.5"
-    nuxt-electron: "npm:^0.7.0"
-    postcss-custom-properties: "npm:^13.3.10"
-    unplugin-vue-components: "npm:^0.26.0"
-    vite-plugin-electron: "npm:^0.28.7"
-    vite-plugin-electron-renderer: "npm:^0.14.5"
-    vue: "npm:^3.4.27"
-    wallpaper: "npm:^7.2.1"
-  languageName: unknown
-  linkType: soft
-
 "nuxt-electron@npm:^0.7.0":
   version: 0.7.0
   resolution: "nuxt-electron@npm:0.7.0"
@@ -13110,6 +13111,13 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/73349e05cf554891d5e0076be10083150c92831c1cffdeee1e25c2222a8a4d8291630825a897049add753c4925e1c916c3614fe8d9c0392d9ff0186e553fe24b
+  languageName: node
+  linkType: hard
+
+"wallpaper-to-work-with-asar@npm:^0.0.0":
+  version: 0.0.0
+  resolution: "wallpaper-to-work-with-asar@npm:0.0.0"
+  checksum: 10c0/b52f355686108417e3fff8a3ff73c53c22406e03a9fbcba7b1beb8925f19cc68bf3bbc3f908c81162d6ba9c0d54e455041851384ed1f3ba9e9b6dbd9e260d76c
   languageName: node
   linkType: hard
 

@@ -1,8 +1,8 @@
 {
-    "name": "nuxt-app",
+    "name": "9wallpapers-desktop",
     "private": true,
     "main": "dist-electron/main.js",
-    "version": "0.0.1",
+    "version": "0.0.4",
     "scripts": {
         "build": "nuxi build --prerender && electron-builder",
         "dev": "nuxt dev",
@@ -31,6 +31,7 @@
     "dependencies": {
         "@nuxt/ui": "2.13.0",
         "download": "^8.0.0",
-        "wallpaper": "^7.2.1"
+        "wallpaper": "^7.2.1",
+        "wallpaper-to-work-with-asar": "^0.0.0"
     }
 }

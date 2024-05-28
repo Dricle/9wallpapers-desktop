@@ -1,27 +1,20 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { app, BrowserWindow, ipcMain } from 'electron'
-import { getWallpaper, setWallpaper } from 'wallpaper'
+import { getWallpaper, setWallpaper } from 'wallpaper-to-work-with-asar'
 import download from 'download'
-
-process.env.APP_ROOT = path.join(__dirname, '..')
-
-export const MAIN_DIST = path.join(process.env.APP_ROOT, 'dist-electron')
-export const RENDERER_DIST = path.join(process.env.APP_ROOT, '.output/public')
-
-process.env.VITE_PUBLIC = process.env.VITE_DEV_SERVER_URL
-    ? path.join(process.env.APP_ROOT, 'public')
-    : RENDERER_DIST
 
 if (process.platform === 'win32')
     app.setAppUserModelId(app.getName())
 
 let win
 
+const cacheImgDir = path.join(app.getPath('appData'), 'img_cache')
+
 function createWindow () {
     win = new BrowserWindow({
         webPreferences: {
-            preload: path.join(MAIN_DIST, 'preload.js')
+            preload: path.join(__dirname, 'preload.js')
         }
     })
 
@@ -29,7 +22,7 @@ function createWindow () {
         win.loadURL(process.env.VITE_DEV_SERVER_URL)
         win.webContents.openDevTools()
     } else {
-        win.loadFile(path.join(process.env.VITE_PUBLIC, 'index.html'))
+        win.loadFile(path.join(__dirname, '..', '.output/public', 'index.html'))
     }
 }
 
@@ -43,32 +36,39 @@ app.whenReady().then(() => {
     createWindow()
 
     ipcMain.on('set-wallpaper', async function (e, { downloadUrl, fileName }) {
-        const storagePath = 'storage/9wpp'
+        try {
+            if (!fs.existsSync(cacheImgDir)) {
+                fs.mkdirSync(cacheImgDir, { recursive: true })
+            }
 
-        if (!fs.existsSync(storagePath)) {
-            fs.mkdirSync(storagePath, { recursive: true })
+            fs.writeFileSync(cacheImgDir + '/' + fileName, await download(downloadUrl, cacheImgDir))
+        } catch (error) {
+            console.error(error)
+            win.webContents.send('log', 'ERROR')
+            win.webContents.send('log', error)
         }
-
-        fs.writeFileSync(storagePath + '/' + fileName, await download(downloadUrl, storagePath))
 
         try {
             console.log('===========')
             console.log('SET WPP')
             console.log(fileName)
             console.log('===========')
-            await setWallpaper(storagePath + '/' + fileName)
+            win.webContents.send('log', 'SET WPP OK')
+            await setWallpaper(cacheImgDir + '/' + fileName)
         } catch (error) {
             console.error(error)
+            win.webContents.send('log', 'ERROR')
+            win.webContents.send('log', error)
         }
 
-        fs.readdir(storagePath, (err, files) => {
+        fs.readdir(cacheImgDir, (err, files) => {
             if (err) {
                 throw err
             }
 
             for (const file of files) {
                 if (file !== fileName) {
-                    fs.unlink(storagePath + '/' + file, (error) => {
+                    fs.unlink(cacheImgDir + '/' + file, (error) => {
                         if (error) {
                             throw error
                         }

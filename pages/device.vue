@@ -23,6 +23,12 @@ export default {
         }
     },
 
+    created () {
+        window.electronAPI.onMainLog((value) => {
+            console.log(value)
+        })
+    },
+
     methods: {
         getRandomWallaper () {
             let settings = localStorage.getItem('9wpp-settings')
