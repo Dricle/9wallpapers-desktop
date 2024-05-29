@@ -18,12 +18,10 @@ export const useAuthStore = defineStore('auth', {
 
     actions: {
         makeApiWrapper () {
-            const runtimeConfig = useRuntimeConfig()
-
             const that = this
 
             return ofetch.create({
-                baseURL: runtimeConfig.public.apiUrl,
+                baseURL: 'https://9wallpapers.com/api',
                 headers: this.apiHeaders,
                 onRequest ({ options }) {
                     /**
