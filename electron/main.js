@@ -3,6 +3,7 @@ import path from 'node:path'
 import { app, BrowserWindow, ipcMain } from 'electron'
 import { getWallpaper, setWallpaper } from 'wallpaper-to-work-with-asar'
 import download from 'download'
+import Store from 'electron-store'
 
 if (process.platform === 'win32')
     app.setAppUserModelId(app.getName())
@@ -35,7 +36,7 @@ app.on('activate', () => {
 app.whenReady().then(() => {
     createWindow()
 
-    ipcMain.on('set-wallpaper', async function (e, { downloadUrl, fileName }) {
+    ipcMain.on('set-wallpaper', async function (e, { downloadUrl, fileName, wallpaperId }) {
         try {
             if (!fs.existsSync(cacheImgDir)) {
                 fs.mkdirSync(cacheImgDir, { recursive: true })
@@ -55,6 +56,10 @@ app.whenReady().then(() => {
             console.log('===========')
             win.webContents.send('log', 'SET WPP OK')
             await setWallpaper(cacheImgDir + '/' + fileName)
+
+            const store = new Store()
+            store.delete('wallpaperId')
+            store.set('wallpaperId', { wallpaperId })
         } catch (error) {
             console.error(error)
             win.webContents.send('log', 'ERROR')
@@ -76,5 +81,16 @@ app.whenReady().then(() => {
                 }
             }
         })
+    })
+
+    ipcMain.on('get-wallpaper', async function () {
+        const store = new Store()
+        const wallpaperId = store.get('wallpaperId')
+        if (wallpaperId) {
+            win.webContents.send('get-wallpaper-id', wallpaperId)
+        } else {
+            const currentWallpaper = await getWallpaper()
+            win.webContents.send('get-wallpaper', currentWallpaper)
+        }
     })
 })

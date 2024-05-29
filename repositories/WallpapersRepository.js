@@ -5,6 +5,10 @@ const WallpapersRepository = {
         return api().$get('/user/wallpapers', query)
     },
 
+    show (id) {
+        return api().$get(`/wallpapers/${id}`)
+    },
+
     random (query = {}) {
         return api().$get('/user/wallpapers/random', query)
     }

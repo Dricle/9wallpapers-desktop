@@ -19,14 +19,26 @@ import WallpapersRepository from '~/repositories/WallpapersRepository.js'
 export default {
     data () {
         return {
+            currentWppPath: null,
             wallpaper: null
         }
     },
 
     created () {
-        window.electronAPI.onMainLog((value) => {
+        window.electronAPI.on('log', (value) => {
             console.log(value)
         })
+
+        window.electronAPI.on('get-wallpaper', (currentWppPath) => {
+            console.log(currentWppPath)
+            this.currentWppPath = currentWppPath
+        })
+
+        window.electronAPI.on('get-wallpaper-id', ({ wallpaperId }) => {
+            this.getWallpaper(wallpaperId)
+        })
+
+        window.electronAPI.getWallpaper()
     },
 
     methods: {
@@ -40,11 +52,13 @@ export default {
             return WallpapersRepository.random(settings)
                 .then((response) => {
                     this.wallpaper = response.data
+                })
+        },
 
-                    window.electronAPI.setWallpaper({
-                        downloadUrl: this.wallpaper.download_url,
-                        fileName: this.wallpaper.file_name
-                    })
+        getWallpaper (id) {
+            return WallpapersRepository.show(id)
+                .then((response) => {
+                    this.wallpaper = response.data
                 })
         }
     }
