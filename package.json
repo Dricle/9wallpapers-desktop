@@ -2,7 +2,7 @@
     "name": "9wallpapers-desktop",
     "private": true,
     "main": "dist-electron/main.js",
-    "version": "v0.1.8",
+    "version": "v0.1.9",
     "scripts": {
         "build": "nuxi build --prerender && electron-builder",
         "dev": "nuxt dev",
@@ -34,5 +34,10 @@
         "download": "^8.0.0",
         "wallpaper": "^7.2.1",
         "wallpaper-to-work-with-asar": "^0.0.0"
+    },
+    "build": {
+        "extraResources": [
+            "dist-electron"
+        ]
     }
 }
