@@ -1,12 +1,13 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { app, BrowserWindow, ipcMain } from 'electron'
-import { getWallpaper, setWallpaper } from 'wallpaper-to-work-with-asar'
+import { getWallpaper, setWallpaper } from 'wallpaper'
 import download from 'download'
 import Store from 'electron-store'
 
-if (process.platform === 'win32')
+if (process.platform === 'win32') {
     app.setAppUserModelId(app.getName())
+}
 
 let win
 
