@@ -9,5 +9,12 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+    window.electronAPI.on('log', (value) => {
+        console.log(value)
+    })
+})
 </script>

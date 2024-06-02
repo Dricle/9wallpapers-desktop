@@ -26,10 +26,6 @@ export default {
     },
 
     created () {
-        window.electronAPI.on('log', (value) => {
-            console.log(value)
-        })
-
         window.electronAPI.on('get-wallpaper', (currentWppPath) => {
             this.currentWppPath = currentWppPath
         })

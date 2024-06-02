@@ -99,4 +99,16 @@ app.whenReady().then(() => {
         const result = await screens()
         win.webContents.send('get-screens', result)
     })
+
+    ipcMain.on('set-token', function (e, token) {
+        const store = new Store()
+        console.log('main,settopen', token)
+        store.delete('auth-token')
+        store.set('auth-token', { token })
+    })
+
+    ipcMain.on('get-token', function () {
+        const store = new Store()
+        win.webContents.send('get-token', store.get('auth-token'))
+    })
 })

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ofetch } from 'ofetch'
-import { useRuntimeConfig, useNuxtApp } from '#app'
+import { useNuxtApp } from '#app'
 
 export const useAuthStore = defineStore('auth', {
     state: () => {
@@ -97,8 +97,10 @@ export const useAuthStore = defineStore('auth', {
             }, 500)
         },
 
-        setUser (user) {
-            this.user = user
+        setToken (token) {
+            this.token = token
+            this.setApiHeader('Authorization', 'Bearer ' + this.token)
+            this.authenticated = true
         }
     },
 

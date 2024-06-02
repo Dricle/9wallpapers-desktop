@@ -22,7 +22,7 @@ const links = [
         },
         {
             label: 'Settings',
-            icon: 'i-heroicons-command-line',
+            icon: 'i-heroicons-cog',
             to: '/settings'
         }
     ],

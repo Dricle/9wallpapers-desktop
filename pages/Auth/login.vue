@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapActions } from 'pinia'
+import { mapActions, mapState } from 'pinia'
 import { useAuthStore } from '~/stores/auth'
 import { definePageMeta } from '#imports'
 
@@ -73,21 +73,34 @@ export default {
         }
     },
 
+    computed: {
+        ...mapState(useAuthStore, ['token'])
+    },
+
     created () {
-        const user = localStorage.getItem('9wpp-user')
-        if (user) {
-            this.setUser(JSON.parse(user))
-        }
+        window.electronAPI.on('get-token', ({ token }) => {
+            if (token) {
+                this.setToken(token)
+            }
+        })
+
+        window.electronAPI.getToken()
     },
 
     methods: {
-        ...mapActions(useAuthStore, ['fetchToken', 'login', 'fetchUser', 'storeTwoFaCode', 'setUser']),
+        ...mapActions(useAuthStore, ['fetchToken', 'login', 'fetchUser', 'storeTwoFaCode', 'setToken']),
 
         submit () {
             this.loading = true
             this.login(this.formData)
                 .then(() => this.fetchUser())
-                .then(() => this.$router.push('/'))
+                .then(() => {
+                    console.log(this.token)
+                    window.electronAPI.setToken(this.token)
+                    setTimeout(() => {
+                        this.$router.push('/')
+                    }, 200)
+                })
                 .catch((error) => {
                     if (error?.response?.data?.error) {
                         this.errors = {
