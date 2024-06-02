@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { app, BrowserWindow, ipcMain } from 'electron'
-import { getWallpaper, setWallpaper } from 'wallpaper'
+import { getWallpaper, setWallpaper, screens } from 'wallpaper'
 import download from 'download'
 import Store from 'electron-store'
 
@@ -93,5 +93,10 @@ app.whenReady().then(() => {
             const currentWallpaper = await getWallpaper()
             win.webContents.send('get-wallpaper', currentWallpaper)
         }
+    })
+
+    ipcMain.on('get-screens', async function () {
+        const result = await screens()
+        win.webContents.send('get-screens', result)
     })
 })

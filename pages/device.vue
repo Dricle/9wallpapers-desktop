@@ -20,7 +20,8 @@ export default {
     data () {
         return {
             currentWppPath: null,
-            wallpaper: null
+            wallpaper: null,
+            screens: []
         }
     },
 
@@ -30,7 +31,6 @@ export default {
         })
 
         window.electronAPI.on('get-wallpaper', (currentWppPath) => {
-            console.log(currentWppPath)
             this.currentWppPath = currentWppPath
         })
 
@@ -38,7 +38,12 @@ export default {
             this.getWallpaper(wallpaperId)
         })
 
+        window.electronAPI.on('get-screens', (screens) => {
+            this.screens = screens
+        })
+
         window.electronAPI.getWallpaper()
+        window.electronAPI.getScreens()
     },
 
     methods: {

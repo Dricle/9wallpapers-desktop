@@ -1,1 +1,1 @@
-"use strict";const n=require("electron");n.contextBridge.exposeInMainWorld("electronAPI",{onMainLog:e=>n.ipcRenderer.on("log",(r,p)=>e(p)),on:(e,r)=>n.ipcRenderer.on(e,(p,t)=>r(t)),setWallpaper:e=>n.ipcRenderer.send("set-wallpaper",e),getWallpaper:()=>n.ipcRenderer.send("get-wallpaper")});
+"use strict";const e=require("electron");e.contextBridge.exposeInMainWorld("electronAPI",{on:(r,n)=>e.ipcRenderer.on(r,(p,t)=>n(t)),setWallpaper:r=>e.ipcRenderer.send("set-wallpaper",r),getWallpaper:()=>e.ipcRenderer.send("get-wallpaper"),getScreens:()=>e.ipcRenderer.send("get-screens")});
