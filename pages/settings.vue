@@ -32,20 +32,23 @@ export default defineComponent({
     },
 
     created () {
-        let settings = localStorage.getItem('9wpp-settings')
-        if (settings) {
-            settings = JSON.parse(settings)
-        } else {
-            settings = this.formData
-        }
-        this.formData = settings
+        window.electronAPI.on('get-settings', (settings) => {
+            const parsedSettings = JSON.parse(settings)
+            this.formData = {
+                allow_unliked: parsedSettings.allow_unliked || this.formData.allow_unliked,
+                interval: parsedSettings.interval || this.formData.interval
+            }
+        })
+
+        window.electronAPI.getSettings()
     },
 
     methods: {
         saveSettings () {
             const toast = useToast()
 
-            localStorage.setItem('9wpp-settings', JSON.stringify(this.formData))
+            // localStorage.setItem('9wpp-settings', JSON.stringify(this.formData))
+            window.electronAPI.setSettings(JSON.stringify(this.formData))
 
             toast.add({ title: 'Settings saved!' })
         }
