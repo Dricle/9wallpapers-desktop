@@ -48,8 +48,10 @@ app.whenReady().then(() => {
 
     ipcMain.on('start-schedule', async function (e, settings = null) {
         if (!job) {
-            job = schedule.scheduleJob('*/5 * * * * *', function () {
-                console.log('This runs every 5 seconds')
+            job = schedule.scheduleJob('*/30 * * * * *', function () {
+                console.log('This runs every 30 seconds')
+                const store = new Store()
+                win.webContents.send('schedule:fetch-new-wpp', store.get('9wpp-settings'))
             })
         }
 

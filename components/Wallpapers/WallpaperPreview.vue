@@ -14,6 +14,7 @@
             <UButton
                 size="2xs"
                 variant="link"
+                :to="'https://9wallpapers.com/w/wp' + wallpaper.id"
                 icon="i-heroicons-arrow-top-right-on-square"
             >
                 Open
