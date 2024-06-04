@@ -129,4 +129,15 @@ app.whenReady().then(() => {
         const store = new Store()
         win.webContents.send('get-token', store.get('auth-token'))
     })
+
+    ipcMain.on('set-settings', function (e, settings) {
+        const store = new Store()
+        store.delete('9wpp-settings')
+        store.set('9wpp-settings', settings)
+    })
+
+    ipcMain.on('get-settings', function () {
+        const store = new Store()
+        win.webContents.send('get-settings', store.get('9wpp-settings'))
+    })
 })

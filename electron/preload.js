@@ -7,6 +7,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     // You can expose other APTs you need here.
     setToken: token => ipcRenderer.send('set-token', token),
     getToken: () => ipcRenderer.send('get-token'),
+    setSettings: settings => ipcRenderer.send('set-settings', settings),
+    getSettings: () => ipcRenderer.send('get-settings'),
     setWallpaper: wallpaper => ipcRenderer.send('set-wallpaper', wallpaper),
     getWallpaper: () => ipcRenderer.send('get-wallpaper'),
     getScreens: () => ipcRenderer.send('get-screens'),
