@@ -4,6 +4,10 @@
             <UButton @click="getRandomWallaper">
                 Change now
             </UButton>
+
+            <UButton @click="startSchedule">
+                Start schedule
+            </UButton>
         </div>
 
         <WallpaperPreview
@@ -61,6 +65,10 @@ export default {
                 .then((response) => {
                     this.wallpaper = response.data
                 })
+        },
+
+        startSchedule () {
+            window.electronAPI.startSchedule({ interval: 5 })
         }
     }
 }

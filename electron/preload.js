@@ -9,5 +9,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getToken: () => ipcRenderer.send('get-token'),
     setWallpaper: wallpaper => ipcRenderer.send('set-wallpaper', wallpaper),
     getWallpaper: () => ipcRenderer.send('get-wallpaper'),
-    getScreens: () => ipcRenderer.send('get-screens')
+    getScreens: () => ipcRenderer.send('get-screens'),
+    startSchedule: settings => ipcRenderer.send('start-schedule', settings)
 })

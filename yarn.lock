@@ -22,12 +22,14 @@ __metadata:
     "@pinia-plugin-persistedstate/nuxt": "npm:^1.2.0"
     "@pinia/nuxt": "npm:^0.5.1"
     "@types/download": "npm:^8"
+    "@types/node-schedule": "npm:^2"
     download: "npm:^8.0.0"
     electron: "npm:29.3.3"
     electron-builder: "npm:^24.13.3"
     electron-store: "npm:^8.2.0"
     eslint: "npm:^9.2.0"
     eslint-plugin-nuxt: "npm:^4.0.0"
+    node-schedule: "npm:^2.1.1"
     nuxt: "npm:3.6.5"
     nuxt-electron: "npm:^0.7.0"
     postcss-custom-properties: "npm:^13.3.10"
@@ -36,7 +38,6 @@ __metadata:
     vite-plugin-electron-renderer: "npm:^0.14.5"
     vue: "npm:^3.4.27"
     wallpaper: "npm:^7.2.1"
-    wallpaper-to-work-with-asar: "npm:^0.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3009,6 +3010,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node-schedule@npm:^2":
+  version: 2.1.7
+  resolution: "@types/node-schedule@npm:2.1.7"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10c0/fd9ad081c165fda966cedc1fef1565ab3e4b032a702d824cc2713a3102e9ec1e41f5af18bf94fcca633a672e985e3c061680d79036530e35d8430b528f244399
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*, @types/node@npm:^20.9.0":
   version: 20.12.12
   resolution: "@types/node@npm:20.12.12"
@@ -4953,6 +4963,15 @@ __metadata:
   version: 1.1.1
   resolution: "create-require@npm:1.1.1"
   checksum: 10c0/157cbc59b2430ae9a90034a5f3a1b398b6738bf510f713edc4d4e45e169bc514d3d99dd34d8d01ca7ae7830b5b8b537e46ae8f3c8f932371b0875c0151d7ec91
+  languageName: node
+  linkType: hard
+
+"cron-parser@npm:^4.2.0":
+  version: 4.9.0
+  resolution: "cron-parser@npm:4.9.0"
+  dependencies:
+    luxon: "npm:^3.2.1"
+  checksum: 10c0/348622bdcd1a15695b61fc33af8a60133e5913a85cf99f6344367579e7002896514ba3b0a9d6bb569b02667d6b06836722bf2295fcd101b3de378f71d37bed0b
   languageName: node
   linkType: hard
 
@@ -8624,6 +8643,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"long-timeout@npm:0.1.1":
+  version: 0.1.1
+  resolution: "long-timeout@npm:0.1.1"
+  checksum: 10c0/a62240cc8f449d7a00081e817ae543fb1ded4d9fc05492e9fa8d6868cb33b2c9d5d71176a6f8be4473df7ba4b208460b3073b0e05069c3ec286122f3e4b5747f
+  languageName: node
+  linkType: hard
+
 "lowercase-keys@npm:1.0.0":
   version: 1.0.0
   resolution: "lowercase-keys@npm:1.0.0"
@@ -8667,6 +8693,13 @@ __metadata:
   dependencies:
     yallist: "npm:^4.0.0"
   checksum: 10c0/cb53e582785c48187d7a188d3379c181b5ca2a9c78d2bce3e7dee36f32761d1c42983da3fe12b55cb74e1779fa94cdc2e5367c028a9b35317184ede0c07a30a9
+  languageName: node
+  linkType: hard
+
+"luxon@npm:^3.2.1":
+  version: 3.4.4
+  resolution: "luxon@npm:3.4.4"
+  checksum: 10c0/02e26a0b039c11fd5b75e1d734c8f0332c95510f6a514a9a0991023e43fb233884da02d7f966823ffb230632a733fc86d4a4b1e63c3fbe00058b8ee0f8c728af
   languageName: node
   linkType: hard
 
@@ -9362,6 +9395,17 @@ __metadata:
   version: 2.0.14
   resolution: "node-releases@npm:2.0.14"
   checksum: 10c0/199fc93773ae70ec9969bc6d5ac5b2bbd6eb986ed1907d751f411fef3ede0e4bfdb45ceb43711f8078bea237b6036db8b1bf208f6ff2b70c7d615afd157f3ab9
+  languageName: node
+  linkType: hard
+
+"node-schedule@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "node-schedule@npm:2.1.1"
+  dependencies:
+    cron-parser: "npm:^4.2.0"
+    long-timeout: "npm:0.1.1"
+    sorted-array-functions: "npm:^1.3.0"
+  checksum: 10c0/6ec51b34b9e676740ac25298e4ced5ee46053379f0d3aad533e51d7e083bc24ced045df1772a95bf9d9cfdb81299340bbf551549a7c5eb6e4d2dc6468c85c70e
   languageName: node
   linkType: hard
 
@@ -11699,6 +11743,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sorted-array-functions@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "sorted-array-functions@npm:1.3.0"
+  checksum: 10c0/d94e3401a2bc1689dc913f56939621c892a3ff1288e984e85689a6c6e46b0ec16f65edc8b47d46b0f09d06857f67ca245553b462da597619102b9fad270476d9
+  languageName: node
+  linkType: hard
+
 "source-map-js@npm:^1.0.1, source-map-js@npm:^1.2.0":
   version: 1.2.0
   resolution: "source-map-js@npm:1.2.0"
@@ -13277,13 +13328,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/73349e05cf554891d5e0076be10083150c92831c1cffdeee1e25c2222a8a4d8291630825a897049add753c4925e1c916c3614fe8d9c0392d9ff0186e553fe24b
-  languageName: node
-  linkType: hard
-
-"wallpaper-to-work-with-asar@npm:^0.0.0":
-  version: 0.0.0
-  resolution: "wallpaper-to-work-with-asar@npm:0.0.0"
-  checksum: 10c0/b52f355686108417e3fff8a3ff73c53c22406e03a9fbcba7b1beb8925f19cc68bf3bbc3f908c81162d6ba9c0d54e455041851384ed1f3ba9e9b6dbd9e260d76c
   languageName: node
   linkType: hard
 

@@ -38,7 +38,6 @@ export default defineComponent({
         } else {
             settings = this.formData
         }
-        console.log(settings)
         this.formData = settings
     },
 

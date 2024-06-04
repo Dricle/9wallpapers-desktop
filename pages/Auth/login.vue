@@ -95,7 +95,6 @@ export default {
             this.login(this.formData)
                 .then(() => this.fetchUser())
                 .then(() => {
-                    console.log(this.token)
                     window.electronAPI.setToken(this.token)
                     setTimeout(() => {
                         this.$router.push('/')

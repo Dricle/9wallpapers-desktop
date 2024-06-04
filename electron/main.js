@@ -4,12 +4,21 @@ import { app, BrowserWindow, ipcMain } from 'electron'
 import { getWallpaper, setWallpaper, screens } from 'wallpaper'
 import download from 'download'
 import Store from 'electron-store'
+import schedule from 'node-schedule'
 
 if (process.platform === 'win32') {
     app.setAppUserModelId(app.getName())
 }
 
+/**
+ * Browser Window
+ */
 let win
+
+/**
+ * Scheduler Job
+ */
+let job
 
 const cacheImgDir = path.join(app.getPath('appData'), 'img_cache')
 
@@ -36,6 +45,16 @@ app.on('activate', () => {
 
 app.whenReady().then(() => {
     createWindow()
+
+    ipcMain.on('start-schedule', async function (e, settings = null) {
+        if (!job) {
+            job = schedule.scheduleJob('*/5 * * * * *', function () {
+                console.log('This runs every 5 seconds')
+            })
+        }
+
+        console.log(settings)
+    })
 
     ipcMain.on('set-wallpaper', async function (e, { downloadUrl, fileName, wallpaperId }) {
         try {
@@ -102,7 +121,6 @@ app.whenReady().then(() => {
 
     ipcMain.on('set-token', function (e, token) {
         const store = new Store()
-        console.log('main,settopen', token)
         store.delete('auth-token')
         store.set('auth-token', { token })
     })
