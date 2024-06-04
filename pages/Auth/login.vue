@@ -80,7 +80,14 @@ export default {
     created () {
         window.electronAPI.on('get-token', ({ token }) => {
             if (token) {
+                this.loading = true
                 this.setToken(token)
+
+                this.fetchUser()
+
+                setTimeout(() => {
+                    this.$router.push('/')
+                }, 200)
             }
         })
 
