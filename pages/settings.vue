@@ -26,7 +26,7 @@ export default defineComponent({
         return {
             formData: {
                 allow_unliked: false,
-                interval: 5
+                interval: 30
             }
         }
     },
@@ -47,7 +47,6 @@ export default defineComponent({
         saveSettings () {
             const toast = useToast()
 
-            // localStorage.setItem('9wpp-settings', JSON.stringify(this.formData))
             window.electronAPI.setSettings(JSON.stringify(this.formData))
 
             toast.add({ title: 'Settings saved!' })
