@@ -33,7 +33,7 @@ export default defineComponent({
 
     created () {
         window.electronAPI.on('get-settings', (settings) => {
-            const parsedSettings = JSON.parse(settings)
+            const parsedSettings = settings && settings !== 'undefined' ? JSON.parse(settings) : {}
             this.formData = {
                 allow_unliked: parsedSettings.allow_unliked || this.formData.allow_unliked,
                 interval: parsedSettings.interval || this.formData.interval
