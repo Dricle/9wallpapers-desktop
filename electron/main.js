@@ -46,14 +46,20 @@ app.on('activate', () => {
 app.whenReady().then(() => {
     createWindow()
 
-    ipcMain.on('start-schedule', async function (e, settings = null) {
-        if (!job) {
-            job = schedule.scheduleJob('*/30 * * * * *', function () {
-                console.log('This runs every 30 seconds')
-                const store = new Store()
-                win.webContents.send('schedule:fetch-new-wpp', store.get('9wpp-settings'))
-            })
+    ipcMain.on('start-schedule', async function (e) {
+        for (const job in schedule.scheduledJobs) {
+            schedule.cancelJob(job)
         }
+
+        const store = new Store()
+        const settings = store.get('9wpp-settings')
+        const parsedSettings = JSON.parse(settings)
+        const interval = parsedSettings.interval || 30
+
+        job = schedule.scheduleJob('*/' + interval + ' * * * *', function () {
+            console.log('This runs every ' + interval + ' minutes')
+            win.webContents.send('schedule:fetch-new-wpp', settings)
+        })
 
         console.log(settings)
     })

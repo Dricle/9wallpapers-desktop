@@ -40,6 +40,7 @@ export default {
 
         window.electronAPI.on('get-screens', (screens) => {
             this.screens = screens
+            console.log(this.screens)
         })
 
         window.electronAPI.getWallpaper()
