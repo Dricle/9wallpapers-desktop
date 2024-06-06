@@ -19,6 +19,7 @@
 
 <script>
 import WallpapersRepository from '~/repositories/WallpapersRepository.js'
+import { useSettingsStore } from '~/stores/settings'
 
 export default {
     data () {
@@ -49,13 +50,9 @@ export default {
 
     methods: {
         getRandomWallaper () {
-            let settings = localStorage.getItem('9wpp-settings')
+            const settingsStore = useSettingsStore()
 
-            if (settings) {
-                settings = JSON.parse(settings)
-            }
-
-            return WallpapersRepository.random(settings)
+            return WallpapersRepository.random(settingsStore.apiSettings)
                 .then((response) => {
                     this.wallpaper = response.data
                 })

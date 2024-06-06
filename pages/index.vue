@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="grid grid-cols-2 md:grid-cols-3 ld:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 mb-6 ld:grid-cols-4 gap-6">
             <div
                 v-for="wallpaper in wallpapers"
                 :key="wallpaper.id"
@@ -9,13 +9,15 @@
             </div>
         </div>
 
-        <UPagination
-            v-if="wallpapers.length > 0"
-            :model-value="pagination.current_page"
-            :page-count="pagination.per_page"
-            :total="pagination.total"
-            @update:model-value="getWallpapers"
-        />
+        <div class="flex justify-center">
+            <UPagination
+                v-if="wallpapers.length > 0"
+                :model-value="pagination.current_page"
+                :page-count="pagination.per_page"
+                :total="pagination.total"
+                @update:model-value="getWallpapers"
+            />
+        </div>
     </div>
 </template>
 

@@ -12,6 +12,18 @@
             />
         </UFormGroup>
 
+        <UFormGroup label="Layout">
+            <USelect
+                v-model="formData.layout"
+                :options="[
+                    'desktop',
+                    'dual',
+                    'mobile'
+                ]"
+                required
+            />
+        </UFormGroup>
+
         <div class="text-right">
             <UButton @click="saveSettings">
                 Save
@@ -21,33 +33,29 @@
 </template>
 
 <script>
+import { useSettingsStore } from '~/stores/settings'
+
 export default defineComponent({
     data () {
         return {
-            formData: {
-                allow_unliked: false,
-                interval: 30
-            }
+            formData: {}
         }
     },
 
     created () {
-        window.electronAPI.on('get-settings', (settings) => {
-            const parsedSettings = settings && settings !== 'undefined' ? JSON.parse(settings) : {}
-            this.formData = {
-                allow_unliked: parsedSettings.allow_unliked || this.formData.allow_unliked,
-                interval: parsedSettings.interval || this.formData.interval
-            }
-        })
-
-        window.electronAPI.getSettings()
+        const settingsStore = useSettingsStore()
+        this.formData = {
+            ...JSON.parse(JSON.stringify(settingsStore.appSettings)),
+            ...JSON.parse(JSON.stringify(settingsStore.apiSettings))
+        }
     },
 
     methods: {
         saveSettings () {
             const toast = useToast()
 
-            window.electronAPI.setSettings(JSON.stringify(this.formData))
+            const settingsStore = useSettingsStore()
+            settingsStore.setSettings(this.formData)
 
             toast.add({ title: 'Settings saved!' })
         }
